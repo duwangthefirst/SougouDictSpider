@@ -20,6 +20,15 @@ def get_all_category_dict():
     return all_category_dict
 
 
+def get_all_category_id_to_name_dict():
+    result = dict()
+    for parent_category_id, parent_category_name in get_parent_category_dict().items():
+        result[str(parent_category_id)] = parent_category_name
+        for sub_category_id, sub_category_name in get_sub_category_dict(parent_category_id).items():
+            result[str(sub_category_id)] = sub_category_name
+    return result
+
+
 def get_parent_category_dict():
     base_url = 'http://pinyin.sogou.com/dict/'
     html = get_html_content(base_url)
